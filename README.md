@@ -2,6 +2,8 @@
 ```bash
 npm i express prompt body-parser request --save
 ```
+## Running sequence
+Please take note server app.js need to be up before running the cli.
 
 ## Run Server side
 ```bash
