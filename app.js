@@ -6,7 +6,7 @@ const express = require('express'),
       assert = require('assert');
 
 
-const mongodb_url = process.env.MONGODB_URL | 'mongodb://mguser:password123@ds121982.mlab.com:21982/safsfdb-ken';
+const mongodb_url = process.env.MONGODB_URL;
 
 // initialize the express app object
 var app = express();
