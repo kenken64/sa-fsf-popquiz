@@ -1,6 +1,6 @@
 ## Install dependencies
 ```bash
-npm i express prompt body-parser request --save
+npm i express prompt body-parser request mongodb --save
 ```
 ## Running sequence
 Please take note server app.js need to be up before running the cli.
