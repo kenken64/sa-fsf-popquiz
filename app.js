@@ -49,12 +49,28 @@ MongoClient.connect(mongodb_url, { useNewUrlParser: true }, function(err, client
         
         quizCollection.insertOne(newPopQuiz,function(err, result){
              console.log(result);
-             res.json(result);
+             res.redirect('/list-quizes');
         });
     })
 
+    router.get('/show-DeleteQuiz/:id', (req, res, next) => {
+        res.render('newQuizform', {});
+    });
+
+    router.get('/show-EditQuiz/:id', (req, res, next) => {
+        res.render('newQuizform', {});
+    });
+
     router.get('/show-newQuizform', (req, res, next) => {
         res.render('newQuizform', {});
+    });
+
+    router.get('/list-quizes', (req, res, next) => {
+        quizCollection.find({}).project({ 'correctAnswer' : 0 }).toArray(function(err, quizes){
+            console.log("from mongodb...");
+            console.log(JSON.stringify(quizes));
+            res.render('listQuizes', {quizes: quizes});
+        });
     });
     
     router.get('/quiz', function(req,res,next){
