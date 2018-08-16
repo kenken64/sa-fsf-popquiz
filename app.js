@@ -6,7 +6,7 @@ const express = require('express'),
       assert = require('assert');
 
 
-const mongodb_url = 'mongodb://mguser:password123@ds121982.mlab.com:21982/safsfdb-ken';
+const mongodb_url = process.env.MONGODB_URL | 'mongodb://mguser:password123@ds121982.mlab.com:21982/safsfdb-ken';
 
 // initialize the express app object
 var app = express();
@@ -103,6 +103,6 @@ MongoClient.connect(mongodb_url, { useNewUrlParser: true }, function(err, client
     });
 })
 
-app.listen(1337, function(){
+app.listen(process.env.PORT, function(){
     console.log("Server is running at localhost:1337");
 })
