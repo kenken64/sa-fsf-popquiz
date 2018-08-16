@@ -7,12 +7,18 @@ const CHECK_ANSWER_API_URL = `${API_URL}check-answer`;
 
 // Start prompt operation
 prompt.start();
+var finalPopQuiz;
 
 request(QUIZ_API_URL, function (error, response, body) {
-    //console.log('error:', error); // Print the error if one occurred
     var popQuiz = JSON.parse(body);
-    console.log(popQuiz.question + "\n");
-    popQuiz.answers.forEach(element => {
+    console.log(popQuiz.length + "\n");
+    var randQuizSelection = Math.floor(Math.random() * Math.floor(popQuiz.length));
+    console.log(randQuizSelection + "\n");
+    finalPopQuiz = popQuiz[randQuizSelection];
+    console.log(popQuiz[randQuizSelection]._id + "\n");
+    console.log(popQuiz[randQuizSelection].question + "\n");
+    
+    popQuiz[randQuizSelection].answers.forEach(element => {
         console.log(element.selection + ". "  + element.value + "\n");
     });
 });
@@ -22,7 +28,9 @@ setTimeout(function(){
     prompt.get(['answer'], function (err, result) {
         // Log the results to commandline console 
         console.log('  answer: ' + result.answer);
+        console.log('  _id: ' + finalPopQuiz._id);
         var inputAnswer = {
+            id: finalPopQuiz._id,
             answer: result.answer
         }
         console.log(CHECK_ANSWER_API_URL);
