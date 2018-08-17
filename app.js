@@ -20,6 +20,7 @@ var router = express.Router();
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(bodyParser.json({limit: '50mb'}));
 
+app.use(express.static(path.join(__dirname, 'public')));
 // load the router into the express object
 app.use('/', router);
 
@@ -27,9 +28,8 @@ MongoClient.connect(mongodb_url, { useNewUrlParser: true }, function(err, client
     console.log(err);
     assert.equal(null, err);
     console.log("Connecting to mongodb ....");
-    const db = client.db();
-    //console.log(db);
-    var quizCollection = db.collection('quiz');
+    db = client.db();
+    quizCollection = db.collection('quiz');
 
     router.post('/newQuiz', function(req, res, next){
         console.log(req.body);

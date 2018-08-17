@@ -10,7 +10,6 @@ prompt.start();
 var finalPopQuiz;
 
 request(QUIZ_API_URL, function (error, response, body) {
-    //console.log('error:', error); // Print the error if one occurred
     var popQuiz = JSON.parse(body);
     console.log(popQuiz.length);
     var randomPopQuiz = Math.floor(Math.random() * Math.floor(popQuiz.length));
@@ -28,6 +27,7 @@ setTimeout(function(){
     prompt.get(['answer'], function (err, result) {
         // Log the results to commandline console 
         console.log('  answer: ' + result.answer);
+        console.log('  _id: ' + finalPopQuiz._id);
         var inputAnswer = {
             id: finalPopQuiz._id,
             answer: result.answer
